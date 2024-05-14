@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Weather App</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+</head>
+<body>      
+    <div class="main-container">
+        <div class="card">
+            <div class="search">
+                <input type="text" placeholder="Enter Your City" spellcheck="false">
+                <button type="submit"><img src="images/search.png" alt=""></button>
+            </div>
+            <div class="error">
+                <p>Invalid city name!</p>
+            </div>
+            <div class="weather">
+                <img src="images/clear.png" class="weather-icon" alt="">
+                <h1 class="temp">22°C</h1>
+                <h4 class="weather-condition"></h4>
+                <h2 class="city">Punjab</h2>
+    
+                <div class="details">
+                    <div class="col">
+                        <img src="images/humidity.png" alt="">
+                        <div>
+                            <p class="humidity">50%</p>
+                            <p>Humidity</p>
+                        </div>
+                    </div>
+                    <div class="col">
+                        <img src="images/wind.png" alt="">
+                        <div>
+                            <p class="wind">15 Km/h</p>
+                            <p>Wind Speed</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="ft">
+            <p>Copyright © 2024 by Sonia | All Rights Reserved.</p>
+            <div class="i">
+                <a target="_blank" href="https://www.linkedin.com/in/sonia-bhagat-020034251/"><i class="fa fa-linkedin"></i></a>
+                <a target="_blank" href="mailto:prsonia09@gmail.com"><i class="fa fa-envelope"></i></a>
+                <a target="_blank" href="https://github.com/Sonia09-coder"><i class="fa fa-github"></i></a>
+            </div>
+        </div>
+    </div>
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+    const apiKey = "4f22607ae5f09bb00084c491bf720400";
+    const apiUrl = "https://api.openweathermap.org/data/2.5/weather?units=metric&q=";
+    const searchBox = document.querySelector(".search input");
+    const searchBtn = document.querySelector(".search button");
+    const weatherIcon = document.querySelector(".weather-icon");
+    const weatherConditionText = document.querySelector(".weather-condition");
+
+    function checkWeather(city) {
+        fetch(apiUrl + city + `&appid=${apiKey}`)
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error("City not found");
+                }
+                return response.json();
+            })
+            .then(data => {
+                document.querySelector(".city").innerHTML = data.name;
+                document.querySelector(".temp").innerHTML = Math.round(data.main.temp) + "°C";
+                document.querySelector(".humidity").innerHTML = data.main.humidity + "%";
+                document.querySelector(".wind").innerHTML = data.wind.speed + " Km/h";
+                weatherConditionText.innerHTML ="Weather "+ data.weather[0].main;
+                document.body.style.backgroundImage = "url('https://source.unsplash.com/1600x900/?" + name + "')";
+
+                // Set the weather icon based on the weather condition
+                setWeatherIcon(data.weather[0].main);
+
+                document.querySelector(".weather").style.display = "block";
+                document.querySelector(".error").style.display = "none";
+            })
+            .catch(error => {
+                document.querySelector(".error").style.display = "block";
+                document.querySelector(".weather").style.display = "none";
+            });
+    }
+
+    function setWeatherIcon(weatherCondition) {
+        switch (weatherCondition) {
+            case "Clouds":
+                weatherIcon.src = "images/clouds.png";
+                break;
+            case "Clear":
+                weatherIcon.src = "images/clear.png";
+                break;
+            case "Rain":
+                weatherIcon.src = "images/rain.png";
+                break;
+            case "Drizzle":
+                weatherIcon.src = "images/drizzle.png";
+                break;
+            case "Mist":
+                weatherIcon.src = "images/mist.png";
+                break;
+            case "Haze":
+                weatherIcon.src = "images/mist.png"; // Set a default image or leave it blank
+                break;
+            default:
+                weatherIcon.src = "";
+        }
+    }
+
+    function handleSearch() {
+        checkWeather(searchBox.value);
+    }
+
+    searchBtn.addEventListener("click", handleSearch);
+
+    // Add event listener for "Enter" key
+    searchBox.addEventListener("keydown", function (event) {
+        if (event.key === "Enter") {
+            handleSearch();
+        }
+    });
+
+    // If you want to display weather information by default, uncomment the line below
+    checkWeather("state of Punjab");
+});
+
+    </script>
+</body>
+</html>

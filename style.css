@@ -1,0 +1,201 @@
+*{
+    margin: 0;
+    padding: 0;
+    font-family: Arial, Helvetica, sans-serif;
+    box-sizing: border-box;
+}
+.main-container{
+    background-image: url('https://source.unsplash.com/1100x900/?landscape');
+    background-position: center;
+    background-size: cover;
+    background-repeat: no-repeat;
+    height: 100vh;
+    position: absolute;
+    width: 100vw;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+}
+.card{
+    width:80% ;
+    max-width: 30%;
+    /* background: linear-gradient(135deg, #00feba, #5b548a); */
+    background-color: rgba(0,0,0,0.4);
+    backdrop-filter: blur(3px);
+    color: #fff;
+    margin: 5% auto 0;
+    border-radius: 20px;
+    padding: 2% 3%;
+    text-align: center;
+    box-shadow: 5px 5px 15px black, -5px -5px 15px black;
+}
+.search{
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+}
+.search input{
+    border: 0;
+    outline: 0;
+    background: #ebfffc;
+    color:#555;
+    padding: 2% 5%;
+    height: 5%;
+    width: 80%;
+    border-radius: 30px;
+    flex: 1;
+    margin-right: 3%;
+    font-size: 120%;
+
+}
+.search button{
+    border: 0;
+    outline: 0;
+    background: #ebfffc;
+    border-radius: 50%;
+    width: 2.7em;
+    height: 2.7em;
+    cursor: pointer;
+}
+.search button img{
+    width:40% ;
+}
+.weather-icon{
+    width: 50%;
+    margin-top: 4%;
+}
+.weather h1{
+    font-size:300% ;
+    font-weight: 500;
+}
+.weather h2{
+    font-size:300% ;
+    font-weight: 400;
+    margin-top: 5%;
+}
+.details{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 3%;
+    margin-top: 10%;
+}
+.col{
+    display: flex;
+    align-items: center;
+    text-align: left;
+}
+.col img{
+    width: 25%;
+    margin-right: 4%;
+}
+.humidity,.wind{
+    font-size: 150%;
+    font-weight: 500;
+    margin-top: -1%;
+}
+.weather{
+    display: none;
+}
+.error{
+    text-align: left;
+    margin-left: 2%;
+    margin-top: 2%;
+    font-size: 120%;
+    display: none;
+}
+.ft{
+    display: grid;
+    height: 13%;
+    grid-template-columns: 1fr;
+    grid-template-rows: 1fr;
+    grid-template-areas: 
+    "i"
+    "p";
+}
+.ft p{
+    grid-area:p ;
+    font-size: 110%;
+    color: white;
+    font-weight: 500;
+}
+.i i{
+    grid-area: i;
+    font-size: 250%;
+    color: white;
+
+}
+.i{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+a i:hover{
+    color: rgb(253, 185, 0);
+
+}
+@media (min-width:900px) and (max-width:1173px) {
+    .main-container .card{
+        min-width:40%;
+    }
+    .i i{
+        font-size: 190%;
+    }
+}
+@media (min-width:600px) and (max-width:899px) {
+    .main-container .card{
+        min-width:50%;
+    }
+    .wind,.humidity{
+        font-size: 120%;
+    }
+    .i i{
+        font-size: 190%;
+    }
+}
+@media (min-width:450px) and (max-width:599px) {
+    .main-container .card{
+        min-width:65%;
+    }
+    .wind,.humidity{
+        font-size: 120%;
+    }
+    .i i{
+        font-size: 190%;
+    }
+}
+@media (min-width:200px) and (max-width:449px) {
+    .main-container .card{
+        min-width:100%;
+    }
+    .wind,.humidity{
+        font-size: 100%;
+    }
+    .ft p{
+        font-size: 100%;
+        text-align: center;
+    }
+    .ft{
+        width: 100%;
+    }
+    
+}
+@media (min-width:10px) and (max-width:199px){
+    .main-container .card{
+        min-width:100%;
+    }
+    .wind,.humidity{
+        font-size: 80%;
+    }
+    .ft p{
+        font-size: 100%;
+        text-align: center;
+    }
+    .ft{
+        width: 100%;
+    }
+}
